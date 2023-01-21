@@ -1,8 +1,9 @@
 import Head from "next/head";
 import { signOut, getSession, signIn } from "next-auth/react";
 import Layout from "../components/layourmain";
+import TablePaginate from "../components/TablePaginate"
 
-export default function Home(session) {
+export default function Home(props) {
   return (
     <>
       <Head>
@@ -30,6 +31,7 @@ export default function Home(session) {
               Cerrar session
             </button>
           </div>
+          <TablePaginate props={props.tablejson}/>
         </div>
       </Layout>
     </>
@@ -37,7 +39,9 @@ export default function Home(session) {
 }
 
 export async function getServerSideProps({ req }) {
-  const session = await getSession({ req });
+  const session = await getSession({req});
+  const tabledata = await fetch('http://localhost:3000/api/fichada');
+  const tablejson = await tabledata.json()
   if (!session) {
     return {
       redirect: {
@@ -47,6 +51,6 @@ export async function getServerSideProps({ req }) {
     };
   }
   return {
-    props: { ...session },
+    props: {sesion:session,tablejson},
   };
 }
