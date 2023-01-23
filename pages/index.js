@@ -1,7 +1,7 @@
 import Head from "next/head";
-import { signOut, getSession, signIn } from "next-auth/react";
-import Layout from "../components/layourmain";
-import TablePaginate from "../components/TablePaginate"
+import { getSession } from "next-auth/react";
+import Layout from "../components/Layourmain";
+import TablePaginate from "../components/TablePaginate";
 
 export default function Home(props) {
   return (
@@ -12,26 +12,8 @@ export default function Home(props) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Layout>
-        <div className="flex h-screen bg-black">
-          <div className="w-screen h-screen flex flex-col space-y-5 justify-center items-center">
-            <button
-              className="w-24 bg-gray-200 px-6 rounded-md"
-              onClick={() => {
-                signIn();
-              }}
-            >
-              Iniciar session
-            </button>
-            <button
-              className="w-24 bg-gray-200 px-6 rounded-md"
-              onClick={() => {
-                signOut();
-              }}
-            >
-              Cerrar session
-            </button>
-          </div>
-          <TablePaginate props={props.tablejson}/>
+        <div className="">
+          <TablePaginate props={props.tablejson} />
         </div>
       </Layout>
     </>
@@ -39,9 +21,9 @@ export default function Home(props) {
 }
 
 export async function getServerSideProps({ req }) {
-  const session = await getSession({req});
-  const tabledata = await fetch('http://localhost:3000/api/fichada');
-  const tablejson = await tabledata.json()
+  const session = await getSession({ req });
+  const tabledata = await fetch("http://localhost:3000/api/fichada");
+  const tablejson = await tabledata.json();
   if (!session) {
     return {
       redirect: {
@@ -51,6 +33,6 @@ export async function getServerSideProps({ req }) {
     };
   }
   return {
-    props: {sesion:session,tablejson},
+    props: { sesion: session, tablejson },
   };
 }
