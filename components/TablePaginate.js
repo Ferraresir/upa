@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import * as XLSX from "xlsx";
+import { utils, write } from "xlsx-js-style";
 import FileSaver from "file-saver";
 
 const Table = ({ props }) => {
@@ -25,15 +25,65 @@ const Table = ({ props }) => {
 
   function handlePrint() {
     const data = props.map((item) => headers.map((h) => item[h]));
-    data.unshift(headers);
-    const ws = XLSX.utils.aoa_to_sheet(data);
-    const wb = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(wb, ws, "SheetJS");
-    const blob = new Blob(
-      [XLSX.write(wb, { bookType: "xlsx", type: "array" })],
-      { type: "application/octet-stream" }
-    );
-    FileSaver.saveAs(blob, "sheetjs.xlsx");
+    const header = [
+      { v: "Id", t: "s" },
+      {
+        v: "Nombre",
+        t: "s",
+        s: {
+          fill: { fgColor: { rgb: "E9E9E9" } },
+          border: { bottom: { style: "thick", color: { rgb: "#000000" } } },
+        },
+      },
+      {
+        v: "Apellido",
+        t: "s",
+        s: {
+          fill: { fgColor: { rgb: "E9E9E9" } },
+          border: { bottom: { style: "thick", color: { rgb: "#000000" } } },
+        },
+      },
+      {
+        v: "Entrada",
+        t: "s",
+        s: {
+          fill: { fgColor: { rgb: "E9E9E9" } },
+          border: { bottom: { style: "thick", color: { rgb: "#000000" } } },
+        },
+      },
+      {
+        v: "Salida",
+        t: "s",
+        s: {
+          fill: { fgColor: { rgb: "E9E9E9" } },
+          border: { bottom: { style: "thick", color: { rgb: "#000000" } } },
+        },
+      },
+      {
+        v: "Horas",
+        t: "s",
+        s: {
+          fill: { fgColor: { rgb: "E9E9E9" } },
+          border: { bottom: { style: "thick", color: { rgb: "#000000" } } },
+        },
+      },
+    ];
+    data.unshift(header);
+    const ws = utils.aoa_to_sheet(data);
+    ws["!cols"] = [
+      { hidden: true },
+      { width: 25 },
+      { width: 25 },
+      { width: 10 },
+      { width: 10 },
+      { width: 10 },
+    ];
+    const wb = utils.book_new();
+    utils.book_append_sheet(wb, ws, "SheetJS");
+    const blob = new Blob([write(wb, { bookType: "xlsx", type: "array" })], {
+      type: "application/octet-stream",
+    });
+    FileSaver.saveAs(blob, `fichada-${new Date().toLocaleDateString()}.xlsx`);
   }
 
   const handleSort = (key) => {
@@ -59,9 +109,9 @@ const Table = ({ props }) => {
   };
 
   return (
-    <div>
+    <div className="">
       <button onClick={handlePrint}>Print</button>
-      <table className="table-auto w-full text-left">
+      <table className="table-auto w-full h-[500px]">
         <thead>
           <tr className="bg-gray-200">
             {headers.map((header, index) => (
