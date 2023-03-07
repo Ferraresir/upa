@@ -9,6 +9,7 @@ const Table = ({ props }) => {
       if (a.apellido > b.apellido) return 1;
       return 0;
     });
+    console.log(props);
     setcurrentData(sortedData);
   }, [props]);
 
@@ -109,9 +110,9 @@ const Table = ({ props }) => {
   };
 
   return (
-    <div className="">
-      <button onClick={handlePrint}>Print</button>
-      <table className="table-auto w-full h-[500px]">
+    <div className="overflow-x-auto">
+      <button className="btn" onClick={handlePrint}>Print</button>
+      <table className="table table-zebra w-full h-[500px]">
         <thead>
           <tr className="bg-gray-200">
             {headers.map((header, index) => (

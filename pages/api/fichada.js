@@ -11,8 +11,8 @@ const connection = ADODB.open(
 export default async function fichada(req, res) {
   let reg = [];
   try {
-    let date = format(new Date(req.body.date), "MM/dd/yyyy"); //req.body.date
-    let nextdate = format(add(new Date(date), { days: 1 }), "MM/dd/yyyy");
+    let date = format(new Date("11-20-2022"), "MM/dd/yyyy"); //req.body.date
+    //let nextdate = format(add(new Date(date), { days: 1 }), "MM/dd/yyyy");
     let users = await connection.query(
       "SELECT userid,Badgenumber,name,lastname FROM USERINFO"
     );
