@@ -3,7 +3,7 @@ import Sidebar from "./Sidebar";
 
 export default function Layout({ children }) {
   return (
-    <div className="h-screen flex bg-gray-50">
+    <div data-theme="cupcake" className="h-screen flex">
       <div>
         <Sidebar />
       </div>

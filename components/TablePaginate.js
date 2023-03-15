@@ -114,7 +114,7 @@ const Table = ({ props }) => {
       <button className="btn" onClick={handlePrint}>Print</button>
       <table className="table table-zebra w-full h-[500px]">
         <thead>
-          <tr className="bg-gray-200">
+          <tr>
             {headers.map((header, index) => (
               <th
                 key={index}
