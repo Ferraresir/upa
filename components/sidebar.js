@@ -3,18 +3,29 @@ import React from "react";
 
 export default function Sidebar() {
   return (
-    <div className="w-52 h-screen flex flex-col items-center">
-      <div className="mt-2 h-8 w-full justify-center flex">
-        <Image src="/upalogo.png" width={120} height={100}  alt="logo upa16"/>
-      </div>
-      <div className="mt-2 border-t border-gray-300 w-full justify-center flex">
-        <ul>
-          <li>Inicio</li>
-          <li>Farmacia</li>
-          <li>Personal</li>
-          <li>Admision</li>
-        </ul>
-      </div>
-    </div>
+    <>
+      <label htmlFor="my-drawer-2" className="drawer-overlay"></label>
+      <ul className="menu p-4 w-80 bg-base-100 text-base-content">
+        <li>
+          <a>Sidebar Item 1</a>
+        </li>
+        <li>
+          <a>Sidebar Item 2</a>
+        </li>
+      </ul>
+    </>
+    // <div className="flex flex-col justify-center items-center mt-2">
+    //   <div className="">
+    //     <Image src="/upalogo.png" width={120} height={100} alt="logo upa16" />
+    //   </div>
+    //   <div className="mt-5 border-t-2 w-full">
+    //     <ul>
+    //       <li>Inicio</li>
+    //       <li>Farmacia</li>
+    //       <li>Personal</li>
+    //       <li>Informatica</li>
+    //     </ul>
+    //   </div>
+    // </div>
   );
 }
